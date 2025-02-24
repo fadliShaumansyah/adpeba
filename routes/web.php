@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DaftarPjController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,6 +18,7 @@ Route::get('/inputanggota', function () {
 //    });
 
 
+
 //Route dengan parameter optional
 //Route::get('/user/{name?}', function ($name = 'Fadli') {
 //    return 'Nama saya adalah ' . $name;
@@ -28,4 +30,5 @@ Route::get('/inputanggota', function () {
 Route::get('/user/{name}', [UserController::class, 'show']);
 Route::get('/user/{name?}', [UserController::class, 'optionalShow']);
 
-
+Route::get('/daftarpj', [DaftarPjController::class, 'index']);
+Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
