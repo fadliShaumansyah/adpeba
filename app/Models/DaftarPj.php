@@ -18,3 +18,4 @@ class DaftarPj extends Model
         'periode_akhir', 
         'kontak_ketua_pj'];
 }
+

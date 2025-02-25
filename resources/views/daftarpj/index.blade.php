@@ -43,5 +43,7 @@
         <button type="submit">Simpan</button>
 
     </form>
+
+    <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
 </body>
 </html>

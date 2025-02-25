@@ -13,7 +13,7 @@ class DaftarPjController extends Controller
     public function index()
     {
         $pjs = DaftarPj::all();
-        return view('daftarpj.index', compact('pjs'));
+        return view('daftarpj.list_pj', compact('pjs'));
     }
 
     /**
@@ -21,7 +21,7 @@ class DaftarPjController extends Controller
      */
     public function create()
     {
-        
+        return view('daftarpj.index');
     }
 
     /**
