@@ -33,3 +33,7 @@ Route::get('/user/{name?}', [UserController::class, 'optionalShow']);
 Route::get('/daftarpj', [DaftarPjController::class, 'create']);
 Route::get('/daftarpj/list_pj', [DaftarPjController::class, 'index']);
 Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
+
+Route::get('/Registrasi', function () {
+    return view('/user/Registrasi');
+});
