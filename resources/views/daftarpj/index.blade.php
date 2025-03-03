@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PJ Se-Baleendah</title>
-</head>
-<body>
-    <h1>INPUT DATA PIMPINAN JAMAAH
+<x-layout>
+
+
+<h1>INPUT DATA PIMPINAN JAMAAH
     </h1>
    
     @if(session()->has('success'))
@@ -45,5 +40,5 @@
     </form>
 
     <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
-</body>
-</html>
+
+</x-layout>

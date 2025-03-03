@@ -1,4 +1,4 @@
 <x-layout>
 
-<h3>Halaman Home</h3>
+<h3>Contact Us</h3>
 </x-layout>

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DaftarPjController;
-
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\login;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,6 +35,23 @@ Route::get('/daftarpj', [DaftarPjController::class, 'create']);
 Route::get('/daftarpj/list_pj', [DaftarPjController::class, 'index']);
 Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
 
-Route::get('/Registrasi', function () {
-    return view('/user/Registrasi');
+Route::get('/Registrasi',[RegisterController::class, 'index'])->middleware('guest');
+Route::post('/Registrasi',[RegisterController::class, 'store'])->middleware('guest');
+
+Route::get('/login',[login::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login',[login::class, 'authenticate']);
+Route::get('/logout',[login::class, 'logout']);
+
+
+Route::get('/blog', function () {
+    return view('blog');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/portofolio', function () {
+    return view('blog');
 });
