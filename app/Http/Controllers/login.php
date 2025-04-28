@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class login extends Controller
+class Login extends Controller
 {
     public function index()
     {

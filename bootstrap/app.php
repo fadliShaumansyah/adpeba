@@ -13,6 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+         // Menambahkan middleware untuk rute tertentu, bisa di sini
+         $middleware->append(AdminMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

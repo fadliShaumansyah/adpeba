@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -9,7 +10,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('user.Registrasi');
+        return view('user.registrasi');
     }
 
     public function store(Request $request)
@@ -24,9 +25,9 @@ class RegisterController extends Controller
            
         ]);
 
-       
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);
-        return redirect('/Login')->with('success','Registrasi Sukses, silahkan log in');
+        return redirect('/login')->with('success','Registrasi Sukses, silahkan log in');
     }
 }

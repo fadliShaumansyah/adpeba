@@ -9,12 +9,12 @@ class UserController extends Controller
 {
     public function show($name)
     {
-        return view('user', ['name' => $name]);
+        return view('dashboard.index', ['name' => $name]);
     }
 
     public function optionalShow($name = 'Fadli')
     {
-        return view('user', ['name' => $name]);
+        return view('dashboard.index', ['name' => $name]);
     }
 
     public function store(Request $request)
@@ -24,8 +24,9 @@ class UserController extends Controller
             'npa' => 'required|string',
             'alamat' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
-            'email' => 'required|date',
-            'password' => 'required|date|after_or_equal:periode awal',
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required|min:5|max:255',
+
            
         ]);
 
