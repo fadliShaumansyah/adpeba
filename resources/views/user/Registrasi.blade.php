@@ -22,6 +22,10 @@
                     <div >
                             <div class="">
                                 <h3 class="text-center text-bold text-4xl">REGISTRASI</h3>
+                                @if ($errors->has('email'))
+    <span class="text-danger">{{ $errors->first('email') }}</span>
+@endif
+
                             </div>
                                     <div class="grid mx-6 ">
                                         <div class="w-full md:w-62 md:justify-center">        

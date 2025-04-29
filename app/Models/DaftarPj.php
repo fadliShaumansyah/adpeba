@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DaftarPj extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    protected $primaryKey = 'id_pj';  
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'nama_pj', 

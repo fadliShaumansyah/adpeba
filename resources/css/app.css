@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .toggle-switch {
+      @apply relative w-20 h-10 rounded-full transition-colors duration-300;
+    }
+  
+    .toggle-switch-background-light {
+      @apply bg-gray-200;
+    }
+  
+    .toggle-switch-background-dark {
+      @apply bg-gray-700;
+    }
+  
+    .toggle-switch-knob {
+      @apply absolute w-8 h-8 rounded-full transition-transform duration-300;
+      top: 50%;
+      left: 1px;
+      transform: translateY(-50%);
+    }
+  
+    .toggle-switch-knob-light {
+      @apply bg-white shadow-md;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.7);
+    }
+  
+    .toggle-switch-knob-dark {
+      @apply bg-gray-800 shadow-md;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8), -4px -4px 10px rgba(255, 255, 255, 0.1);
+    }
+  
+    .toggle-switch-checked .toggle-switch-knob {
+      @apply translate-x-10;
+    }
+  
+    .toggle-switch-checked .toggle-switch-background-light {
+      @apply bg-blue-300;
+    }
+  
+    .toggle-switch-checked .toggle-switch-background-dark {
+      @apply bg-blue-700;
+    }
+  }

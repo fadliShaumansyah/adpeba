@@ -21,7 +21,7 @@ class DaftarPjController extends Controller
      */
     public function create()
     {
-        return view('daftarpj.index');
+        return view('dashboard.inputpj');
     }
 
     /**

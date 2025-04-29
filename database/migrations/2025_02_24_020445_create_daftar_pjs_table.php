@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('daftar_pjs', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id_pj')->primary();
             $table->string('nama_pj');
+            $table->string('kode_pj');
             $table->text('alamat_pj');
             $table->string('ketua_pj');
             $table->string('sk_ketua_pj');

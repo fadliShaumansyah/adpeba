@@ -21,12 +21,14 @@ class RegisterController extends Controller
             'no_hp' => 'required|string|max:255',
             'email' => 'required|email:rfc.dns|unique:users',
             'password' => 'required|min:5|max:255',
-           
-        ]);
+        ],[
+                'email.unique' => 'Email sudah terdaftar, gunakan email lain.'
+            ]
+        );
 
        
 
         User::create($validatedData);
-        return redirect('/Login')->with('success','Registrasi Sukses, silahkan log in');
+        return redirect('/login')->with('success','Registrasi Sukses, silahkan log in');
     }
 }
