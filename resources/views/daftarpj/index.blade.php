@@ -1,8 +1,5 @@
 <x-dashboard>
 
-
-
-   
     @if(session()->has('success'))
     <div role="alert">
       {{ session('success') }}
@@ -15,6 +12,8 @@
         @csrf
         <label for="nama_pj">Nama pj:</label>
         <input type="text" name="nama_pj" id="nama_pj" required><br>
+        <label for="kode_pj">kode pj:</label>
+        <input type="text" name="kode_pj" id="kode_pj" required><br>
 
         <label for="alamat_pj">Alamat Pj:</label>
         <input type="text" name="alamat_pj" id="alamat_pj" required><br>

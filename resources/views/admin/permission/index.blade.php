@@ -1,12 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<x-dashboard>
     
 
 <div class="max-w-4xl mx-auto mt-8">
@@ -25,7 +17,7 @@
             <h3 class="text-lg font-semibold">{{ $user->name }} ({{ $user->email }})</h3>
 
             <!-- Tombol untuk menghapus admin -->
-            <form action="{{ route('admin.remove', $user->id) }}" method="POST" style="display:inline;">
+            <form action="/admin/remove/{id}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded">
@@ -57,5 +49,4 @@
 <div>
     <a href="/dashboard" class="text-blue-500 hover:underline">Back to Dashboard</a>
     </div>
-</body>
-</html>
+</x-dashboard>

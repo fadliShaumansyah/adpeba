@@ -35,6 +35,7 @@ class DaftarPjController extends Controller
     {
         $validatedData = $request->validate([
             'nama_pj' => 'required|string|max:255',
+            'kode_pj' => 'required|string|max:255',
             'alamat_pj' => 'required|string',
             'ketua_pj' => 'required|string|max:255',
             'sk_ketua_pj' => 'required|string|max:255',

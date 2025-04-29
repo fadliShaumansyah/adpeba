@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class DaftarPj extends Model
 {
@@ -16,6 +17,7 @@ class DaftarPj extends Model
     protected $fillable = [
         'nama_pj', 
         'alamat_pj', 
+        'kode_pj',
         'ketua_pj', 
         'sk_ketua_pj', 
         'periode_awal', 

@@ -84,7 +84,7 @@
                             <a class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300" href="/daftarpj/list_pj">
                             <span class="leading-none">PJ Baru</span>
                             </a>
-                            <a href="/admin.permissions" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">add event</span>
+                            <a href="/daftarpj" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">add event</span>
                             </a>
                         @endif
                     @endauth
@@ -109,8 +109,8 @@
                 </div>
 
             </div>
-            <div class="flex flex-col flex-grow">
-                <div class="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300">
+            <div class="flex flex-col flex-grow overflow-auto">
+                <div class="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300 ">
                     <h1 class="text-lg font-medium">{{ Auth::user()->name }}</h1>
                     <button class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300">
                         Admin
@@ -135,7 +135,7 @@
                 
                 {{ $slot }}
 
-</div>
+                </div>
 
 <a class="fixed flex items-center justify-center h-8 pr-2 pl-1 bg-blue-600 rounded-full bottom-0 right-0 mr-4 mb-4 shadow-lg text-blue-100 hover:bg-blue-600" href="https://twitter.com/lofiui" target="_top">
 	<div class="flex items-center justify-center h-6 w-6 bg-blue-500 rounded-full">
