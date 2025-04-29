@@ -1,8 +1,7 @@
-<x-layout>
+<x-dashboard>
 
 
-<h1>INPUT DATA PIMPINAN JAMAAH
-    </h1>
+
    
     @if(session()->has('success'))
     <div role="alert">
@@ -41,4 +40,4 @@
 
     <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
 
-</x-layout>
+</x-dashboard>

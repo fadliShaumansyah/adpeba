@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('role')->default('user');
+            $table->json('permissions')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

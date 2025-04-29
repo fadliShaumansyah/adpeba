@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DaftarPj;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Event;
 
 class DaftarPjController extends Controller
 {
@@ -12,8 +14,10 @@ class DaftarPjController extends Controller
      */
     public function index()
     {
+        $eventEnd = \Carbon\Carbon::parse('2025-05-01 23:59:59')->toIso8601String();
+   
         $pjs = DaftarPj::all();
-        return view('daftarpj.list_pj', compact('pjs'));
+        return view('daftarpj.list_pj', compact('pjs','eventEnd'));
     }
 
     /**
@@ -44,6 +48,7 @@ class DaftarPjController extends Controller
         DaftarPj::create($validatedData);
         return redirect('/daftarpj')->with('success','Data berhasil ditambahkan');
     }
+ 
 
     /**
      * Display the specified resource.
