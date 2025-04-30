@@ -14,7 +14,17 @@
       </div>
       <div class="flex justify-center self-center  z-10">
         <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
-          <form action="/login" method="POST">
+              @if ($errors->any())
+                <div class="alert alert-danger bg-red-200 p-1 rounded-lg ">
+                    <ul class="mb-0 text-red-600">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
+
+          <form action="{{ route('login') }}" method="POST">
           @csrf  
         
             <div class="mb-4">
@@ -58,7 +68,7 @@
             <div class="pt-5 text-center text-gray-400 text-xs">
               <span>
                 Belum mempunyai akun ?
-                <a href="/Registrasi" rel="" target="_blank" title="Ajimon" class="text-green hover:text-green-500 ">Registrasi</a></span>
+                <a href="{{ route('Registrasi') }}" rel="" target="_blank" title="Ajimon" class="text-green hover:text-green-500 ">Registrasi</a></span>
             </div>
           </form>
         </div>

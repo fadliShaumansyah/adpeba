@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::get('/inputanggota', function () {
     return view('inputanggota');
-});
+})->middleware('auth');
 
 //Rute dengan parameter
 //  Route::get('/user/{name}', function ($name) {
@@ -34,8 +34,8 @@ Route::get('/inputanggota', function () {
 Route::get('/user/{name}', [UserController::class, 'show'])->middleware('auth');
 Route::get('/user/{name?}', [UserController::class, 'optionalShow'])->middleware('auth');
 
-Route::get('/daftarpj', [DaftarPjController::class, 'create']);
-Route::get('/daftarpj/list_pj', [DaftarPjController::class, 'index']);
+Route::get('/inputpj', [DaftarPjController::class, 'create'])->name('inputpj');
+Route::get('/list_pj', [DaftarPjController::class, 'index'])->name('list_pj');
 Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
 
 Route::get('/Registrasi',[RegisterController::class, 'index'])->middleware('guest');
@@ -60,7 +60,7 @@ Route::get('/portofolio', function () {
 });
 Route::get('/dashboard', function () {
     return view('dashboard.index');
-})->middleware('auth');
+})->name('dashboard')->middleware('auth');
 
 Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(function () {
     Route::get('/admin/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index');

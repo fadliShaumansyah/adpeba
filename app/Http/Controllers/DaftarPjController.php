@@ -14,10 +14,10 @@ class DaftarPjController extends Controller
      */
     public function index()
     {
-        $eventEnd = \Carbon\Carbon::parse('2025-05-01 23:59:59')->toIso8601String();
+        $pjs = DaftarPj::orderByRaw('CAST(SUBSTRING(kode_pj, 3) AS UNSIGNED) ASC')->get();
+        return view('daftarpj.list_pj', compact('pjs'));
    
-        $pjs = DaftarPj::all();
-        return view('daftarpj.list_pj', compact('pjs','eventEnd'));
+       
     }
 
     /**
@@ -47,7 +47,7 @@ class DaftarPjController extends Controller
        
 
         DaftarPj::create($validatedData);
-        return redirect('/daftarpj')->with('success','Data berhasil ditambahkan');
+        return redirect('/list_pj')->with('success','Data berhasil ditambahkan');
     }
  
 

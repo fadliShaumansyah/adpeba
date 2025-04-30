@@ -15,7 +15,7 @@
       </div>
       <div class="flex justify-center self-center  z-10">
         <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
-          <form action="/Registrasi" method="POST">
+          <form action="{{ route('Registrasi') }}" method="POST">
           @csrf  
         
             <div class="mb-4">
@@ -71,7 +71,7 @@
             <div class="pt-5 text-center text-gray-400 text-xs">
               <span>
                 Sudah mempunyai akun ?
-                <a href="/login" rel="" target="_blank" class="text-green hover:text-green-500 font0bold ">Login</a></span>
+                <a href="{{ route('login') }}" rel="" target="_blank" class="text-green hover:text-green-500 font0bold ">Login</a></span>
             </div>
           </form>
         </div>
