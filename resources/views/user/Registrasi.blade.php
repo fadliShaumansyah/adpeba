@@ -1,69 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <title>Document</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body>
+<x-layout>
     
-   <div class="container">
-        <x-navbar/>
-        <div class="flex justify-center mt-16 mx-6 lg:mt-32">
-            <div class="w-full">
 
+<div class="bg-no-repeat bg-cover bg-center relative" style="background-image: url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80);"><div class="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0">
+</div>
 
-
-            
-                <form action="/Registrasi" method="POST">
-                     @csrf
-                    <div >
-                            <div class="">
-                                <h3 class="text-center text-bold text-4xl">REGISTRASI</h3>
-                                @if ($errors->has('email'))
-    <span class="text-danger">{{ $errors->first('email') }}</span>
-@endif
-
-                            </div>
-                                    <div class="grid mx-6 ">
-                                        <div class="w-full md:w-62 md:justify-center">        
-                                            <div>
-                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                                                <input name="name" type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Name" required />
-                                            </div>
-                                            <div>
-                                                <label for="npa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPA</label>
-                                                <input type="text" name="npa" id="npa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="22.0016" required />
-                                            </div>
-                                            <div>
-                                                <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Adress" required />
-                                            </div>  
-                                            <div>
-                                                <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone number</label>
-                                                <input type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Phone Number" required />
-                                            </div>
-                                            
-                                        
-                                            <div class="mb-6">
-                                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
-                                                <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Email" required />
-                                            </div> 
-                                            <div class="mb-6">
-                                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                                <input type="password" id="password" name ="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
-                                            </div> 
-                                        
-                                            <button type="submit" class="text-white bg-green-500 hover:bg-green-600 transition ease-in duration-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                                        </div> 
-                                    </div>
-                            
-                    </div>
-                </form>
-            </div>
+  <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
+      <div class="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
+        <div class="self-start hidden lg:flex flex-col  text-white">
+          <img src="" class="mb-3">
+          <h1 class="mb-3 font-bold text-5xl">Hi ? Welcome ! </h1>
+          <p class="pr-3">Lorem ipsum is placeholder text commonly used in the graphic, print,
+            and publishing industries for previewing layouts and visual mockups</p>
         </div>
- </div>  
-</body>
-</html>
+      </div>
+      <div class="flex justify-center self-center  z-10">
+        <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
+          <form action="/Registrasi" method="POST">
+          @csrf  
+        
+            <div class="mb-4">
+              <h3 class="font-semibold text-2xl text-gray-800">Sign Up </h3>
+              <p class="text-gray-500">Create your account.</p>
+            </div>
+
+            <div class="space-y-5">
+              <div class="space-y-2">
+                  <label for="name" class="text-sm font-medium text-gray-700 tracking-wide">Nama</label>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="name" id="name" type="text" placeholder="mail@gmail.com" require>
+              </div>
+            </div>
+            <div class="space-y-5">
+              <div class="space-y-2">
+                  <label for="npa" class="text-sm font-medium text-gray-700 tracking-wide">NPA</label>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="npa" id="napa" type="text" placeholder="mail@gmail.com" require>
+              </div>
+            </div>
+            <div class="space-y-5">
+              <div class="space-y-2">
+                  <label for="alamat" class="text-sm font-medium text-gray-700 tracking-wide">Address</label>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="alamat" id="alamat" type="text" placeholder="mail@gmail.com" require>
+              </div>
+            </div>
+            <div class="space-y-5">
+              <div class="space-y-2">
+                  <label for="no_hp" class="text-sm font-medium text-gray-700 tracking-wide">Phone Number</label>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="no_hp" id="no_hp" type="text" placeholder="mail@gmail.com" require>
+              </div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="space-y-2">
+                  <label for="email" class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="email" id="email" type="email" placeholder="mail@gmail.com" require>
+              </div>
+            </div>
+
+              <div class="space-y-2">
+                <label for="password" class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
+                Password
+                </label>
+                <input class="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" id="password" placeholder="Enter your password" require>
+             </div>
+            
+              <div>
+                <button type="submit" class="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">
+                  Sign Up
+                </button>
+              </div>
+            
+            <div class="pt-5 text-center text-gray-400 text-xs">
+              <span>
+                Sudah mempunyai akun ?
+                <a href="/login" rel="" target="_blank" class="text-green hover:text-green-500 font0bold ">Login</a></span>
+            </div>
+          </form>
+        </div>
+      </div>
+ </div>
+
+
+</x-layout>
