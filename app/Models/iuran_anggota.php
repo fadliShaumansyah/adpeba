@@ -10,7 +10,7 @@ class iuran_anggota extends Model
     protected $table = 'iuran_anggota';
     
     protected $fillable = [
-        'user_id',
+        'npa',
         'id_pj',
         'jumlah',
         'tahun',
@@ -20,7 +20,7 @@ class iuran_anggota extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, ' npa');
     }
 
     public function daftar_pjs()
@@ -30,7 +30,7 @@ class iuran_anggota extends Model
 
     public static function ceksudahbayar($user, $tahun, $bulan)
     {
-        return self::where('user_id',$userId)
+        return self::where('npa',$userId)
         ->where('tahun',$tahun)
         ->where('bulan',$bulan)
         ->exists();

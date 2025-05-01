@@ -8,13 +8,23 @@ use App\Models\User;
 class AdminPermissionController extends Controller
 {
  
-    public function index()
+    public function index(Request $request)
     {
         //tampilkan admin
-        $users = User::where('role', 'admin')->orWhere('role', 'super_admin')->get();
-        return view('admin.permission.index', compact('users'));
+     
+        $user = null;
+      
+        if ($request->has('npa')) {
+            $user = User::where('npa', $request->npa)->first();
+            
     }
 
+    $users = User::whereIn('role', ['admin', 'super_admin'])->get();
+
+    return view('admin.permission.index', compact('user', 'users'));
+
+    }
+    //permision
     public function updatePermissions(Request $request, User $user)
     {
         $permissions = $request->input('permissions', []);
@@ -24,22 +34,20 @@ class AdminPermissionController extends Controller
         return redirect()->back()->with('success', 'Permissions updated.');
     }
 
-    public function add(Request $request)
+   // Role
+    public function promoteToAdmin(Request $request)
     {
-        //validasi data
+        // Validasi input npa
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:users,email',
-            'name' => 'required|string|max:255',
+            'npa' => 'required|exists:users,npa',
         ]);
-        //tambah admin
-        $admin = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt('password123'),
-            'role' => 'admin',
-        ]);
-
-        return redirect()->route('admin.manage')->with('success', 'Admin berhasil ditambahkan');
+    
+        // Cari user dan update role-nya
+        $user = User::where('npa', $validatedData['npa'])->first();
+        $user->role = 'admin';
+        $user->save();
+    
+        return redirect()->route('admin.manage')->with('success', 'User berhasil diubah menjadi admin');
     }
 
     public function remove($id)

@@ -13,8 +13,8 @@
             and publishing industries for previewing layouts and visual mockups</p>
         </div>
       </div>
-      <div class="flex justify-center self-center  z-10">
-        <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
+      <div class="flex justify-center self-center w-1/4 z-10">
+        <div class="p-12 bg-white mx-auto rounded-2xl w-full ">
           <form action="{{ route('Registrasi') }}" method="POST">
           @csrf  
         
@@ -71,7 +71,7 @@
             <div class="pt-5 text-center text-gray-400 text-xs">
               <span>
                 Sudah mempunyai akun ?
-                <a href="{{ route('login') }}" rel="" target="_blank" class="text-green hover:text-green-500 font0bold ">Login</a></span>
+                <a href="/login" rel="" target="_blank" class="text-green hover:text-green-500 hover:font-bold font-bold ">Login</a></span>
             </div>
           </form>
         </div>

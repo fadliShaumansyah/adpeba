@@ -14,7 +14,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasUuids;
 
-    protected $primaryKey ='user_id';
+    protected $primaryKey ='npa';
     Public $incrementing = false;
     protected $keyType = 'string';
     /**
@@ -23,7 +23,6 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'user_id',
         'name',
         'npa',
         'alamat',

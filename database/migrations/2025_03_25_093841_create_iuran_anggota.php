@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('iuran_anggota', function (Blueprint $table) {
             $table->uuid('id_iuran')->primary();
-            $table->uuid('user_id');
+            $table->uuid('npa');
             $table->uuid('id_pj');
             $table->decimal('jumlah,10,2')->default(20000);
             $table->year('tahun');
@@ -22,10 +22,10 @@ return new class extends Migration
             $table->timestamps();
 
             //mencegah pembayaran double
-            $table->unique(['user_id', 'id_pj', 'tahun', 'bulan']);
+            $table->unique(['npa', 'id_pj', 'tahun', 'bulan']);
 
             //foreign Keu
-            $table->foreign('user_id')->references('user_id')->on('users')->cascadeOnDelete();
+            $table->foreign('npa')->references('npa')->on('users')->cascadeOnDelete();
             $table->foreign('id_pj')->references('id_pj')->on('daftar_pjs')->cascadeOnDelete();
         });
     }

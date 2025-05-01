@@ -38,11 +38,11 @@ Route::get('/inputpj', [DaftarPjController::class, 'create'])->name('inputpj');
 Route::get('/list_pj', [DaftarPjController::class, 'index'])->name('list_pj');
 Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
 
-Route::get('/Registrasi',[RegisterController::class, 'index'])->middleware('guest');
+Route::get('/Registrasi',[RegisterController::class, 'index'])->name('Registrasi')->middleware('guest');
 Route::post('/Registrasi',[RegisterController::class, 'store']);
 
-Route::get('/login',[Login::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login',[Login::class, 'authenticate']);
+Route::get('/login',[Login::class, 'index'])->middleware('guest');
+Route::post('/login',[Login::class, 'authenticate'])->name('login');           
 Route::get('/logout',[Login::class, 'logout']);
 
 
@@ -69,3 +69,6 @@ Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(funct
     Route::post('/admin/add', [AdminPermissionController::class, 'add'])->name('admin.add');
     Route::delete('/admin/remove/{id}', [AdminPermissionController::class, 'remove'])->name('admin.remove');
 });
+
+Route::get('/admin/promote', [AdminPermissionController::class, 'showPromoteForm'])->name('admin.promote');
+Route::post('/admin/promote', [AdminPermissionController::class, 'promoteToAdmin'])->name('admin.promote.set');
