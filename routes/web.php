@@ -64,7 +64,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(function () {
     Route::get('/admin/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index');
-    Route::post('/admin/permissions/{user}', [AdminPermissionController::class, 'updatePermissions'])->name('admin.permissions.update');
+    Route::post('/admin/permissions', [AdminPermissionController::class, 'PromoteToAdmin'])->name('admin.permissions.update');
     Route::get('/admin/manage', [AdminPermissionController::class, 'index'])->name('admin.manage');
     Route::post('/admin/add', [AdminPermissionController::class, 'add'])->name('admin.add');
     Route::delete('/admin/remove/{id}', [AdminPermissionController::class, 'remove'])->name('admin.remove');

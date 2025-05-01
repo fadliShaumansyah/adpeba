@@ -12,16 +12,16 @@ class AdminPermissionController extends Controller
     {
         //tampilkan admin
      
-        $user = null;
+        $finduser = null;
       
         if ($request->has('npa')) {
-            $user = User::where('npa', $request->npa)->first();
+            $finduser = User::where('npa', $request->npa)->first();
             
     }
 
     $users = User::whereIn('role', ['admin', 'super_admin'])->get();
 
-    return view('admin.permission.index', compact('user', 'users'));
+    return view('admin.permission.index', compact('finduser', 'users'));
 
     }
     //permision
@@ -47,20 +47,30 @@ class AdminPermissionController extends Controller
         $user->role = 'admin';
         $user->save();
     
-        return redirect()->route('admin.manage')->with('success', 'User berhasil diubah menjadi admin');
+        return redirect()->route('admin.permissions.index')->with('success', 'User berhasil diubah menjadi admin');
     }
 
     public function remove($id)
-    {
-        //hapus admin
-        $admin = User::findOrFail($id);
+{
+    $admin = User::findOrFail($id);
 
-        if ($admin->role == 'super_admin') {
-            return redirect()->route('admin.manage')->with('error', 'Cannot remove Super Admin');
+    if ($admin->role === 'super_admin') {
+        // Hitung jumlah super admin saat ini
+        $superAdminCount = User::where('role', 'super_admin')->count();
+
+        // Jika hanya ada satu super admin, tidak boleh dihapus
+        if ($superAdminCount <= 1) {
+            return redirect()->route('admin.permissions.index')
+                ->with('error', 'Tidak bisa menghapus Super Admin terakhir.');
         }
-
-        $admin->delete();
-
-        return redirect()->route('admin.manage')->with('success', 'Admin berhasil dihapus');
     }
+    
+     $admin->role = 'user';
+     $admin->save();
+
+
+    return redirect()->route('admin.permissions.index')
+        ->with('success', 'Admin berhasil dihapus');
+}
+
 }

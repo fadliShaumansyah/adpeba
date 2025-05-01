@@ -8,26 +8,34 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="bg-red-100 p-2 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Menampilkan Daftar Admin -->
         <h2 class="text-xl font-semibold mb-4">Admin List</h2>
         @foreach ($users as $user)
-            <div class="bg-white p-4 rounded shadow mb-6">
-                <h3 class="text-lg font-semibold">{{ $user->name }} ({{ $user->email }})</h3>
+            <div class="bg-white p-2 rounded shadow mb-2 flex flex-row">
+                
 
                 <!-- Tombol untuk menghapus admin -->
-                <form action="/admin/remove/{id}" method="POST" style="display:inline;">
+                <form action="{{ route('admin.remove', $user->npa) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded">
-                        Remove Admin
+                        Hapus
                     </button>
                 </form>
+                <h3 class="ml-6 text-lg font-semibold">{{ $user->name }} 👉 {{ $user->role }}</h3>
             </div>
         @endforeach
 
         <!-- Form untuk Menambah Admin Baru -->
+     
         <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
-            <h2 class="text-xl font-bold mb-4">Cari User Berdasarkan NPA</h2>
+            <h2 class="text-xl font-bold mb-4">Tambah Admin Baru</h2>
+            
 
             <!-- Form pencarian -->
             <form method="GET" action="{{ route('admin.permissions.index') }}" class="mb-6">
@@ -38,18 +46,18 @@
                 </div>
             </form>
 <!-- Tampilkan hasil jika ada -->
-@if($user)
+@if($finduser)
     <div class="p-4 border rounded bg-gray-50">
-        <p><strong>Nama:</strong> {{ $user->name }}</p>
-        <p><strong>Email:</strong> {{ $user->email }}</p>
-        <p><strong>Role:</strong> {{ $user->role }}</p>
+        <p><strong>Nama:</strong> {{ $finduser->name }}</p>
+        <p><strong>Email:</strong> {{ $finduser->email }}</p>
+        <p><strong>Role:</strong> {{ $finduser->role }}</p>
 
-        @if($user->role !== 'admin')
+        @if($finduser->role !== 'admin')
             <!-- Form untuk mengubah menjadi admin -->
-            <form method="POST" action="{{ route('admin.permissions.update', ['user' => $user->npa]) }}"
+            <form method="POST" action="{{ route('admin.permissions.update') }}"
                 class="mt-4">
                 @csrf
-                <input type="hidden" name="npa" value="{{ $user->npa }}">
+                <input type="hidden" name="npa" value="{{ $finduser->npa }}">
                 <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Jadikan Admin</button>
             </form>
         @else
