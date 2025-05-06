@@ -10,6 +10,9 @@
       </button>
     </div>
     @endif
+<div clas="flex flex-shrink">
+  <x-jamiyyah />
+
    
    
  
@@ -52,12 +55,13 @@
                      </svg>
                      <span class="pl-2 mx-1">Save</span>
                   </button>
-               
+                </div>
             </form>
-  <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
+          <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
+        </div>
 </div>
 
-    
+</div>   
 
     
 </x-dashboard>

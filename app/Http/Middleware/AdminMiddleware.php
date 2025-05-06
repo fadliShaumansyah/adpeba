@@ -19,7 +19,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
          // Cek apakah user yang login adalah admin
-         if (Auth::check() && Auth::user()->role == 'admin') {
+         if (Auth::check() && Auth::user()->role == 'admin'|| Auth::user()->role =='super_admin' ) {
             return $next($request);
         }
 

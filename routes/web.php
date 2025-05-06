@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\AdminPermissionController;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,6 +70,13 @@ Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(funct
     Route::post('/admin/add', [AdminPermissionController::class, 'add'])->name('admin.add');
     Route::delete('/admin/remove/{id}', [AdminPermissionController::class, 'remove'])->name('admin.remove');
 });
+Route::middleware(['auth', AdminMiddleware::class . ':admin'])->group(function () {
+    Route::get('/jamiyyah', function (){
+        return view('components.jamiyyah');})->name('jamiyyah');
+});
+
+
+
 
 Route::get('/admin/promote', [AdminPermissionController::class, 'showPromoteForm'])->name('admin.promote');
 Route::post('/admin/promote', [AdminPermissionController::class, 'promoteToAdmin'])->name('admin.promote.set');
