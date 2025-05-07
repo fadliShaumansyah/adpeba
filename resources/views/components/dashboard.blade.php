@@ -19,6 +19,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                     </svg>
                 </a>
+            @auth
+             @if(Auth::user()->role === 'admin' || Auth::user()->role === 'super_admin')
+                                     
         <!--pendidikan-->
                 <a class="relative group flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300 z-40" href="/pendidikan">
             <!-- TOOLTIP -->
@@ -83,7 +86,26 @@
                 </a>
               
                 <!--osb-->
-                
+                @endif
+                @endauth  
+                <!--guest fitur-->
+                <a class="relative group flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300 z-40" href="/beranda">
+                  <!-- TOOLTIP -->
+                  <span class="hidden group-hover:inline-block absolute left-full top-0 ml-2 bg-black text-white text-sm p-2 rounded z-[9999] whitespace-nowrap shadow-lg pointer-events-none">
+                    Beranda
+                </span>      
+                <svg class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                <a class="relative group flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300 z-40" href="/artikel">
+                  <!-- TOOLTIP -->
+                  <span class="hidden group-hover:inline-block absolute left-full top-0 ml-2 bg-black text-white text-sm p-2 rounded z-[9999] whitespace-nowrap shadow-lg pointer-events-none">
+                    Artikel
+                </span>      
+                <svg class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                </a>
             </div>
         
             
@@ -92,7 +114,7 @@
                 <div class="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300 ">
                     <h1 class="text-lg font-medium">{{ Auth::user()->name }}</h1>
                     <button class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300">
-                        Admin
+                    
                     </button>
                     @auth
                                     @if(Auth::user()->role === 'super_admin')
@@ -100,9 +122,7 @@
                                         </a>
                                     @endif
                                 @endauth
-                    <a class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300" href="/logout">
-                        <span class="leading-none">Logout</span>
-                    </a>
+                    
                     <!--profile-->
                     <a class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300" href="/profile">
                        
@@ -120,7 +140,7 @@
                         <div class="absolute right-0 flex-col items-start hidden w-40 pb-1 bg-white border border-gray-300 shadow-lg group-focus:flex">
                             <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
                             <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
-                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
+                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="/logout">Logout</a>
                         </div>
                     </button>
 

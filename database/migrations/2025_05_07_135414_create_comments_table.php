@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->text('content')->nullable();
-            $table->string('image')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -25,18 +25,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
-    //relasi ke user
-    public function user(){
+
+       //relasi ke user
+       public function user(){
         return $this->belongsTo(User::class);
     }
-    //relasi ke komentar
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
-    //relasi ke like
-    public function Likes(){
-        return $this->hasMany(Like::class);
+    //relasi ke post
+    public function post(){
+        $this->belongsTo(Post::class);
     }
 };

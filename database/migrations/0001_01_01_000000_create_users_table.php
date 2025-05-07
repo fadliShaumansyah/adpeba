@@ -12,12 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('npa')->unique();
             $table->string('alamat');
+            $table->string('desa')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('provinsi')->nullable();
             $table->string('no_hp');
             $table->string('email')->unique();
             $table->string('password');
+            $table->Date('tanggal_lahir')->nullable();
+            $table->string('sd')->nullable();
+            $table->string('smp')->nullable();
+            $table->string('sma')->nullable();
+            $table->string('s1')->nullable();
+            $table->string('s2')->nullable();
+            $table->string('s3')->nullable();
+            $table->text('bio')->nullable();
             $table->string('role')->default('user');
             $table->json('permissions')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -49,5 +62,18 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+    }
+
+    //relasi ke post
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+    //relasi ke komentar
+    public function comments(){
+        return $this-hasMany(Comment::class);
+    }
+    //relasi ke like
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 };

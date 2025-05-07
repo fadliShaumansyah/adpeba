@@ -93,7 +93,12 @@ Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('editp
 // Rute untuk mengupdate data profil setelah disubmit
 Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
 
+Route::middleware('auth:sanctum')->grup(function (){
+    Route::get('/posts',[PostController::class,'index']);
+    Route::post('/posts',[PostController::class,'store']);
+    Route::delete('/posts/{post}',[PostController::class,'destroy']);
 
+});
 
 
 Route::get('/admin/promote', [AdminPermissionController::class, 'showPromoteForm'])->name('admin.promote');

@@ -21,6 +21,17 @@ class UserSeeder extends Seeder
                 'name' => 'Super Admin',
                 'npa' => '22.0016',
                 'alamat' => 'Pameutingan',
+                'desa' => 'Malakasari',
+                'Kecamatan' => 'Baleendah',
+                'Kota' => 'Bandung',
+                'provinsi' => 'Jawa Barat',
+                'tanggal_lahir' => '1994/03/24',
+                'sd' => 'SDN Rancaengang',
+                'smp' => 'Mts Persis 03',
+                'sma' => 'SMK Al-Marwah',
+                's1' => 'STAI Yamisa',
+                
+                'bio' => 'I am Web Developer, I Like Design, now I work In Purwakarta',
                 'no_hp' => '08996244594',
                 'email' => 'Fadlishaumansyah@gmail.com',
                 'password' => Hash::make('111114'), // password default, ganti dengan yang aman
