@@ -10,7 +10,7 @@
       </button>
     </div>
     @endif
-<div clas="flex flex-shrink">
+<div class="flex flex-shrink">
   <x-jamiyyah />
 
    
@@ -59,7 +59,7 @@
             </form>
           <a href="/daftarpj/list_pj">Lihat Daftar PJ</a>
         </div>
-</div>
+  </div>
 
 </div>   
 

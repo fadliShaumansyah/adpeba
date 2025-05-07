@@ -73,7 +73,25 @@ Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(funct
 Route::middleware(['auth', AdminMiddleware::class . ':admin'])->group(function () {
     Route::get('/jamiyyah', function (){
         return view('components.jamiyyah');})->name('jamiyyah');
+    Route::get('/kaderisasi', function (){
+        return view('kaderisasi.index');})->name('kaderisasi');
+    Route::get('/osb', function (){
+        return view('osb.index');})->name('osb');
+    Route::get('/pendidikan', function (){
+        return view('pendidikan.silatsuta');})->name('silatsuta');
+    Route::get('/sosial', function (){
+        return view('sosial.index');})->name('sosial');
+    Route::get('/dakwah', function (){
+        return view('dakwah.index');})->name('dakwah');
 });
+// Rute untuk menampilkan halaman profil
+Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
+
+// Rute untuk menampilkan halaman edit profil
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('editprofil')->middleware('auth');
+
+// Rute untuk mengupdate data profil setelah disubmit
+Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
 
 
 
