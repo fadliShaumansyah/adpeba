@@ -6,6 +6,7 @@ use App\Http\Controllers\DaftarPjController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\AdminPermissionController;
+use App\Http\Controllers\PostController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -93,11 +94,16 @@ Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('editp
 // Rute untuk mengupdate data profil setelah disubmit
 Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
 
-Route::middleware('auth:sanctum')->grup(function (){
-    Route::get('/posts',[PostController::class,'index']);
-    Route::post('/posts',[PostController::class,'store']);
-    Route::delete('/posts/{post}',[PostController::class,'destroy']);
+Route::middleware('auth')->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/createpost', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
 });
 
 

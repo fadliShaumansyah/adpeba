@@ -14,9 +14,9 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasUuids;
 
-    protected $primaryKey ='npa';
-    Public $incrementing = false;
-    protected $keyType = 'string';
+    protected $primaryKey = 'id'; // Pastikan primaryKey adalah 'id'
+    public $incrementing = false; // Karena UUID tidak auto-increment
+    protected $keyType = 'string'; // Karena UUID adalah tipe string
     /**
      * The attributes that are mass assignable.
      *
@@ -74,5 +74,18 @@ class User extends Authenticatable
         $permissions = $this->permissions ?? [];
 
         return in_array($permission, $permissions);
+    }
+
+       //relasi ke post
+       public function posts(){
+        return $this->hasMany(Post::class);
+    }
+    //relasi ke komentar
+    public function comments(){
+        return $this-hasMany(Comment::class);
+    }
+    //relasi ke like
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

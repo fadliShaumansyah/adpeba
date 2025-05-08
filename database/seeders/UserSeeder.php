@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -18,7 +19,8 @@ class UserSeeder extends Seeder
         if (User::where('email', 'fadlishaumansyah@gmail.com')->doesntExist()) {
             // Membuat user super admin pertama
             User::create([
-                'name' => 'Super Admin',
+                'id' => (string) Str::uuid(), // Menggunakan UUID
+                'name' => 'Fadli Shaumansyah',
                 'npa' => '22.0016',
                 'alamat' => 'Pameutingan',
                 'desa' => 'Malakasari',

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,12 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('likes');
     }
-    //relasi ke user
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-    //relasi ke post
-    public function post(){
-        $this->belongsTo(Post::class);
-    }
+   
 };

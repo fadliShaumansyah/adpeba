@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('npa')->unique();
             $table->string('alamat');
@@ -64,16 +64,5 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 
-    //relasi ke post
-    public function posts(){
-        return $this->hasMany(Post::class);
-    }
-    //relasi ke komentar
-    public function comments(){
-        return $this-hasMany(Comment::class);
-    }
-    //relasi ke like
-    public function likes(){
-        return $this->hasMany(Like::class);
-    }
+ 
 };

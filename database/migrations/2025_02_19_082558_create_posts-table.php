@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
@@ -27,16 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('posts');
     }
-    //relasi ke user
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-    //relasi ke komentar
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
-    //relasi ke like
-    public function Likes(){
-        return $this->hasMany(Like::class);
-    }
+   
 };

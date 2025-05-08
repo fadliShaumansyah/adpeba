@@ -16,6 +16,7 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'id' => Str::uuid(), // Generate UUID untuk id
             'name' => 'required|string|max:255',
             'npa' => 'required|string',
             'alamat' => 'required|string|max:255',
