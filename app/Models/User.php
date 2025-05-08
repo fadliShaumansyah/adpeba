@@ -24,6 +24,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'profil_image',
         'npa',
         'alamat',
         'desa',
@@ -35,7 +36,7 @@ class User extends Authenticatable
         'smp',
         'sma',
         's1',
-        's2',
+        's2', 
         's3',
         'bio',
         'no_hp',
@@ -54,6 +55,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected function image():Attribute
+    {
+        return Attribute::make (
+            get: fn($profil_image)=> $profil_image ? url('/storage/users'.$profil_image): null,
+        );
+    }
 
     /**
      * Get the attributes that should be cast.

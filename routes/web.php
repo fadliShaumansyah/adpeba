@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/createpost', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-
+ 
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 

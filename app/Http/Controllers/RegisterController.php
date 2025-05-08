@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Str;
 class RegisterController extends Controller
 {
     public function index()

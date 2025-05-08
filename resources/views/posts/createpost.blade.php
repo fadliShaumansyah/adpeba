@@ -20,7 +20,7 @@
             <textarea name="content" id="content" rows="4"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">{{ old('content') }}</textarea>
         </div>
-
+ 
         <div>
             <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Gambar (opsional)</label>
             <input type="file" name="image" id="image"

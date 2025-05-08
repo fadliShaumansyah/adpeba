@@ -7,8 +7,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
-
+ 
 class UserController extends Controller
 {
 
@@ -26,6 +27,7 @@ class UserController extends Controller
     {
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
+        'profil_image' => 'nullable|image|max:2048',
         'npa' => 'required|string',
         'alamat' => 'required|string|max:255',
         'desa' => 'string|max:255',
@@ -39,16 +41,25 @@ class UserController extends Controller
         's1' => 'string|max:255',
         's2' => 'string|max:255',
         's3' => 'string|max:255',
-        'bio' => 'string',
+        'bio' => 'text',
         'no_hp' => 'required|string|max:255',
         'email' => 'required|email:rfc,dns',
         'password' => 'required|min:5|max:255',
     ]);
+ 
+    $path = null;
+    if ($request->hasFile('profil_image')) {
+        $path = $request->file('profil_image')->store('profilimg', 'public');
+        
+    }
 
     // Enkripsi password
     $validatedData['password'] = Hash::make($validatedData['password']);
 
-    // Default role untuk user baru'user'
+    // Enkripsi password
+    $validatedData['profil_image'] = $path;
+
+    // 
     $validatedData['role'] = 'user';
 
     // Default permissions untuk user baru (misalnya hanya bisa melihat data sendiri)
@@ -83,29 +94,30 @@ public function editProfile()
 // Mengupdate profil pengguna
 public function updateProfile(Request $request)
 {
+    
       // Ambil pengguna yang sedang login
       $user = Auth::user();
-
+ 
  
     // Validasi input dari form
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
-        'npa' => 'required|string',
+        'profil_image' => 'nullable|image|max:2048',
         'alamat' => 'required|string|max:255',
         'desa' => 'string|max:255',
         'kecamatan' => 'string|max:255',
         'kota' => 'string|max:255',
         'provinsi' => 'string|max:255',
         'tanggal_lahir' => 'date|max:255',
-        'sd' => 'string|max:255',
-        'smp' => 'string|max:255',
-        'sma' => 'string|max:255',
-        's1' => 'string|max:255',
-        's2' => 'string|max:255',
-        's3' => 'string|max:255',
-        'Bio' => 'string',
+        'sd' => 'nullable|string|max:255',
+        'smp' => 'nullable|string|max:255',
+        'sma' => 'nullable|string|max:255',
+        's1' => 'nullable|string|max:255',
+        's2' => 'nullable|string|max:255',
+        's3' => 'nullable|string|max:255',
+        'bio' => 'nullable|string',
         'no_hp' => 'required|string|max:255',
-        'email' => 'required|email:rfc,dns',
+        'email' => 'required|email:rfc',
         // Tambahkan validasi untuk password jika ingin mengubah password
         'password' => 'nullable|min:5|max:255',
     ]);
@@ -114,7 +126,6 @@ public function updateProfile(Request $request)
 
     // Update data pengguna
     $user->name = $validatedData['name'];
-    $user->npa = $validatedData['npa'];
     $user->alamat = $validatedData['alamat'];
     $user->no_hp = $validatedData['no_hp'];
     $user->email = $validatedData['email'];
@@ -134,6 +145,13 @@ public function updateProfile(Request $request)
     if ($request->filled('password')) {
         $user->password = Hash::make($validatedData['password']);
     }
+
+    $path = null;
+    if ($request->hasFile('profil_image')) {
+        $path = $request->file('profil_image')->store('profil_images', 'public');
+        $user->profil_image=$path;
+    }
+   
 
     // Simpan perubahan
     $user->save();

@@ -7,8 +7,51 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+<div class=" w-screen h-screen text-gray-700 z-50">
+<div class="flex flex-col flex-grow ">
+                <div class="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300 ">
+                    <h1 class="text-lg font-medium">{{ Auth::user()->name }}</h1>
+                    <button class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300">
+                    
+                    </button>
+                    @auth
+                                    @if(Auth::user()->role === 'super_admin')
+                                        <a href="/admin/permissions" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Admin Panel</span>
+                                        </a>
+                                    @endif
+                                @endauth
+                    
+                    <!--profile-->
+                    <a class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300" href="/profile">
+                       
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    </a>
+                  
+                    <button class="relative ml-2 text-sm focus:outline-none group">
+                        <div class="flex items-center justify-between w-10 h-10 rounded hover:bg-gray-300">
+                            <svg class="w-5 h-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                            </svg>
+                        </div>
+                        <div class="absolute right-0 flex-col items-start hidden w-40 pb-1 bg-white border border-gray-300 shadow-lg group-focus:flex">
+                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
+                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
+                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="/logout">Logout</a>
+                        </div>
+                    </button>
 
-<div class="max-w-3xl mx-auto px-4 py-6">
+                    
+                </div>
+                
+              
+                
+            </div>
+
+ 
+<div class="max-w-3xl mx-auto px-4 py-6 bg-slate-100">
+
     <h2 class="text-2xl font-bold mb-4">Feed Postingan</h2>
 
     <a href="{{ route('posts.create') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded mb-6">
@@ -52,7 +95,7 @@
 
     @foreach ($posts as $post)
     
-        <div class="bg-white shadow rounded-lg mb-6 p-4">
+        <div class="bg-white shadow rounded-lg my-2 p-4">
             <div class="flex items-center justify-between mb-2">
                 <div>
                     <strong>{{ $post->user->name }}</strong>
@@ -61,7 +104,7 @@
             </div>
             <div class="mb-3">
                 @if ($post->image)
-                    <img src="{{ $post->image }}" class="w-full rounded mb-2" alt="Post Image">
+                    <img src="{{ $post->image }}" class="w-full h-250 rounded shadow-xl mb-2" alt="Post Image">
                 @endif
                 <p class="text-gray-800">{{ $post->content }}</p>
             </div>
@@ -107,6 +150,7 @@
             </div>
         </div>
     @endforeach
+</div>
 </div>
 </body>
 </html>

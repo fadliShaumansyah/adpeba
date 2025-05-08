@@ -119,7 +119,7 @@
         <!--Img Col-->
         <div class="w-full lg:w-2/5">
             <!-- Big profile image for side bar (desktop) -->
-            <img src="https://plus.unsplash.com/premium_photo-1713788509854-2caebf3fa08e?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+            <img src="{{asset('storage/'. $user->profil_image) }}" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
             <!-- Image from: http://unsplash.com/photos/MP0IUfwrn0A -->
 
         </div>
