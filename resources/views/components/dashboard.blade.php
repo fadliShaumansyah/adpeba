@@ -116,6 +116,11 @@
                     <button class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300">
                     
                     </button>
+
+                    <!--pesan-->
+                     <a href="/messages" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Pesan</span>
+                                        </a>
+
                     @auth
                                     @if(Auth::user()->role === 'super_admin')
                                         <a href="/admin/permissions" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Admin Panel</span>
@@ -131,18 +136,19 @@
                     </svg>
                     </a>
                   
-                    <button class="relative ml-2 text-sm focus:outline-none group">
-                        <div class="flex items-center justify-between w-10 h-10 rounded hover:bg-gray-300">
+                   <div class="relative">
+                        <button id="dropdownToggle" class="flex items-center justify-center w-10 h-10 rounded hover:bg-gray-300 focus:outline-none">
                             <svg class="w-5 h-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                             </svg>
+                        </button>
+
+                        <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded hidden z-50">
+                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="#">Menu Item 1</a>
+                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="#">Menu Item 2</a>
+                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="/logout">Logout</a>
                         </div>
-                        <div class="absolute right-0 flex-col items-start hidden w-40 pb-1 bg-white border border-gray-300 shadow-lg group-focus:flex">
-                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
-                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="#">Menu Item 1</a>
-                            <a class="w-full px-4 py-2 text-left hover:bg-gray-300" href="/logout">Logout</a>
-                        </div>
-                    </button>
+                    </div>
 
                     
                 </div>
@@ -160,7 +166,19 @@
                 </div>
                 <span class="text-sm ml-1 leading-none">@lofiui</span>
             </a>
-     
+  <script>
+    const toggle = document.getElementById('dropdownToggle');
+    const menu = document.getElementById('dropdownMenu');
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function () {
+        menu.classList.add('hidden');
+    });
+</script>   
   </body>
   
 </html>

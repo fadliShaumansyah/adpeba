@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {

@@ -3,9 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Like extends Model
 {
+
+     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+       
+    ];
     //
      //relasi ke user
      public function user(){

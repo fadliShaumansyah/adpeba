@@ -5,10 +5,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DaftarPjController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Login;
-use App\Http\Controllers\AdminPermissionController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\AdminPermissionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Post;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -109,3 +113,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/admin/promote', [AdminPermissionController::class, 'showPromoteForm'])->name('admin.promote');
 Route::post('/admin/promote', [AdminPermissionController::class, 'promoteToAdmin'])->name('admin.promote.set');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+});

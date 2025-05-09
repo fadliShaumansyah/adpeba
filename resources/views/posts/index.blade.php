@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite('resources/css/app.css')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class=" w-screen h-screen text-gray-700 z-50">
@@ -97,8 +98,13 @@
     
         <div class="bg-white shadow rounded-lg my-2 p-4">
             <div class="flex items-center justify-between mb-2">
-                <div>
-                    <strong>{{ $post->user->name }}</strong>
+                <div class="flex items-center ">
+                    {{-- <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="{{asset('storage/'. $post->user->profil_image) }}" alt="Bordered avatar">  --}}
+                    <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-4" src="{{asset('storage/'. $post->user->profil_image) }}" alt="Bordered avatar"> 
+                        
+                    <strong>
+                       
+                    {{ $post->user->name }}</strong>
                     <span class="text-sm text-gray-500">• {{ $post->created_at->diffForHumans() }}</span>
                 </div>
             </div>
@@ -113,8 +119,10 @@
                 {{-- Like button --}}
                 <form action="{{ route('posts.like', $post) }}" method="POST">
                     @csrf
-                    <button class="flex items-center text-sm text-blue-600 hover:text-blue-800">
-                        👍 {{ $post->likes->count() }}
+                    <button 
+                        class="like-button flex items-center text-sm text-blue-600 hover:text-blue-800" 
+                        data-post-id="{{ $post->id }}">
+                        👍 <span class="like-count">{{ $post->likes->count() }}</span>
                     </button>
                 </form>
 
@@ -137,6 +145,8 @@
 
                 @foreach ($post->comments as $comment)
                     <div class="mb-2 text-sm">
+                        
+
                         <strong>{{ $comment->user->name }}</strong>: {{ $comment->content }}
 
                         @if ($comment->user_id == auth()->id())
@@ -152,5 +162,31 @@
     @endforeach
 </div>
 </div>
+
+<script>
+$(document).ready(function () {
+    $('.like-button').click(function (e) {
+        e.preventDefault();
+
+        let button = $(this);
+        let postId = button.data('post-id');
+
+        $.ajax({
+            url: '/posts/' + postId + '/like',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                // Perbarui jumlah like tanpa reload
+                button.find('.like-count').text(response.likes_count);
+            },
+            error: function () {
+                alert('Gagal menyukai postingan.');
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>

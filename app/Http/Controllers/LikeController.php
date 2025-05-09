@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class LikeController extends Controller
 {
     //
     public function toggle(Post $post)
     {
-        $user = Auth::user();
-        $like = $post->likes()->where('user_id', $user->id)->first();
+       $user = auth()->user();
 
-        if ($like) {
-            $like->delete();
-        } else {
-            $post->likes()->create(['user_id' => $user->id]);
-        }
+    // Cek apakah user sudah like
+    if ($post->likes()->where('user_id', $user->id)->exists()) {
+        $post->likes()->where('user_id', $user->id)->delete();
+    } else {
+        $post->likes()->create(['user_id' => $user->id]);
+    }
 
-        return back();
+    return response()->json([
+        'likes_count' => $post->likes()->count(),
+    ]);
     }
 }
