@@ -12,6 +12,22 @@
 
 
     <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+@if (!Auth::user()->hasVerifiedEmail())
+    <p class="text-red-600 font-semibold">Status: <strong>Not Verified</strong></p>
+
+    <form method="POST" action="{{ route('verification.send') }}" class="mt-2">
+        @csrf
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded">
+            Kirim Ulang Email Verifikasi
+        </button>
+    </form>
+
+    @if (session('message'))
+        <p class="text-green-600 mt-2">{{ session('message') }}</p>
+    @endif
+@else
+    <p class="text-green-600 font-semibold">Status: <strong>Verified</strong></p>
+@endif
 
         <!--Main Col-->
         <div id="profile"
