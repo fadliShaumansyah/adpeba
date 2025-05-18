@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite('resources/css/app.css')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+ 
 </head>
 <body>
 <div class=" w-screen h-screen text-gray-700 z-50">
@@ -15,6 +17,11 @@
                     <button class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-300">
                     
                     </button>
+
+                      <!--pesan-->
+                      <a href="/messages" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Pesan</span>
+                                        </a>
+
                     @auth
                                     @if(Auth::user()->role === 'super_admin')
                                         <a href="/admin/permissions" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Admin Panel</span>
@@ -103,8 +110,8 @@
                     <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-4" src="{{asset('storage/'. $post->user->profil_image) }}" alt="Bordered avatar"> 
                         
                     <strong>
-                       
-                    {{ $post->user->name }}</strong>
+                    
+                   <a href ="{{ route('show.profil', $post->user->id) }}"> {{ $post->user->name }}</strong>
                     <span class="text-sm text-gray-500">• {{ $post->created_at->diffForHumans() }}</span>
                 </div>
             </div>
@@ -163,30 +170,6 @@
 </div>
 </div>
 
-<script>
-$(document).ready(function () {
-    $('.like-button').click(function (e) {
-        e.preventDefault();
-
-        let button = $(this);
-        let postId = button.data('post-id');
-
-        $.ajax({
-            url: '/posts/' + postId + '/like',
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}'
-            },
-            success: function (response) {
-                // Perbarui jumlah like tanpa reload
-                button.find('.like-count').text(response.likes_count);
-            },
-            error: function () {
-                alert('Gagal menyukai postingan.');
-            }
-        });
-    });
-});
-</script>
+@vite('resources/js/script.js')
 </body>
 </html>

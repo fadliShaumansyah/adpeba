@@ -68,7 +68,7 @@
             <div class="pt-5 text-center text-gray-400 text-xs">
               <span>
                 Belum mempunyai akun ?
-                <a href="{{ route('Registrasi') }}" rel="" target="_blank" title="Ajimon" class="text-green hover:text-green-500 ">Registrasi</a></span>
+                <a href="{{ route('Registrasi') }}" rel="" target="_blank" class="text-green hover:text-green-500 ">Registrasi</a></span>
             </div>
           </form>
         </div>

@@ -18,6 +18,7 @@ class UserController extends Controller
         return view('dashboard.index', ['name' => $name]);
     }
 
+   
     public function optionalShow($name = 'Fadli')
     {
         return view('dashboard.index', ['name' => $name]);
@@ -69,6 +70,15 @@ class UserController extends Controller
     User::create($validatedData);
 
     return redirect('/Registrasi')->with('success', 'Data berhasil ditambahkan');
+}
+
+public function showProfileuser($id)
+{
+    // Cari pengguna berdasarkan ID
+    $user = User::findOrFail($id);
+
+    // Tampilkan view profil pengguna
+    return view('user.profil', ['user' => $user]);
 }
 
 // Menampilkan profil pengguna

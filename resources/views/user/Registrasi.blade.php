@@ -28,12 +28,14 @@
               <div class="space-y-2">
                   <label for="name" class="text-sm font-medium text-gray-700 tracking-wide">Nama</label>
                   <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="name" id="name" type="text" placeholder="Nama" require>
+                  
               </div>
             </div>
             <div class="space-y-5">
               <div class="space-y-2">
                   <label for="npa" class="text-sm font-medium text-gray-700 tracking-wide">NPA</label>
                   <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="npa" id="napa" type="text" placeholder="NPA" require>
+                  @error('npa')<div class="invalid-feedback">{{$message}}</div>@enderror
               </div>
             </div>
             <div class="space-y-5">
@@ -53,6 +55,7 @@
               <div class="space-y-2">
                   <label for="email" class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
                   <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="email" id="email" type="email" placeholder="mail@gmail.com" require>
+                  @error('email')<div class="invalid-feedback">{{$message}}</div>@enderror
               </div>
             </div>
 

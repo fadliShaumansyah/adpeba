@@ -93,6 +93,7 @@ Route::middleware(['auth', AdminMiddleware::class . ':admin'])->group(function (
 });
 // Rute untuk menampilkan halaman profil
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
+Route::get('/profile/{id}', [UserController::class, 'showProfileuser'])->name('show.profil')->middleware('auth');
 
 // Rute untuk menampilkan halaman edit profil
 Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('editprofil')->middleware('auth');
@@ -130,6 +131,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill(); // tandai sebagai verified
-    return redirect('/akun'); // arahkan kembali ke akun
+    return redirect('/dashboard'); // arahkan kembali ke akun
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
