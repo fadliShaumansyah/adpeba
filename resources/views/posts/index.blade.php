@@ -110,8 +110,8 @@
                     <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-4" src="{{asset('storage/'. $post->user->profil_image) }}" alt="Bordered avatar"> 
                         
                     <strong>
-                    
-                   <a href ="{{ route('show.profil', $post->user->id) }}"> {{ $post->user->name }}</strong>
+                        <a href ="{{ route('show.profil', $post->user->id) }}"> {{ $post->user->name }}</a>
+                    </strong>
                     <span class="text-sm text-gray-500">• {{ $post->created_at->diffForHumans() }}</span>
                 </div>
             </div>

@@ -1,27 +1,27 @@
-import $ from 'jquery';
+document.addEventListener('DOMContentLoaded', function () {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-$(document).ready(function () {
-    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
 
-    $('.like-button').click(function (e) {
-        e.preventDefault();
+            const postId = this.dataset.postId;
 
-        let button = $(this);
-        let postId = button.data('post-id');
-
-        $.ajax({
-            url: '/posts/' + postId + '/like',
-            type: 'POST',
-            data: {
-                _token: csrfToken
-            },
-            success: function (response) {
+            fetch(`/posts/${postId}/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
                 // Perbarui jumlah like tanpa reload
-                button.find('.like-count').text(response.likes_count);
-            },
-            error: function () {
+                this.querySelector('.like-count').textContent = data.likes_count;
+            })
+            .catch(() => {
                 alert('Gagal menyukai postingan.');
-            }
+            });
         });
     });
 });
