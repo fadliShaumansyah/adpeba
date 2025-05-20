@@ -121,6 +121,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 });
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+Route::post('/messages/{message}/reply', [MessageController::class, 'reply'])->name('messages.reply');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();

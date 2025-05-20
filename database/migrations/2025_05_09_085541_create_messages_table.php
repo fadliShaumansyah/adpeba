@@ -16,6 +16,7 @@ return new class extends Migration
         $table->uuid('sender_id');
         $table->uuid('receiver_id');
         $table->text('content');
+        $table->text('parent_id')->nullable();
         $table->timestamps();
     });
     }

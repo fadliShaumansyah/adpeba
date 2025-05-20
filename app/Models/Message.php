@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['sender_id', 'receiver_id', 'content'];
+    protected $fillable = ['sender_id', 'receiver_id', 'content','parent_id'];
 
     public function sender()
     {
@@ -16,5 +16,15 @@ class Message extends Model
     public function receiver()
     {
         return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Message::class, 'parent_id');
+    }
+
+    public function originalMessage()
+    {
+        return $this->belongsTo(Message::class, 'parent_id');
     }
 }
