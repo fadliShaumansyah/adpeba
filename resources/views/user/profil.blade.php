@@ -61,9 +61,11 @@
                     <a href="" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
 				         Contribute</a>
                         
-                         <a href="{{route('editprofil',$user->id)}}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
-				         Edit Your Profile</a>
-                        
+                         
+                        @if(Auth::id() === $user->id)
+                        <a href="{{ route('profile.edit') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">Edit Profil</a>
+                        @endif
+
 
                     
                 </div>

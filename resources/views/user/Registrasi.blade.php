@@ -27,34 +27,28 @@
             <div class="space-y-5">
               <div class="space-y-2">
                   <label for="name" class="text-sm font-medium text-gray-700 tracking-wide">Nama</label>
-                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="name" id="name" type="text" placeholder="Nama" require>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="name" id="name" type="text" placeholder="Nama" required>
                   
               </div>
             </div>
-            <div class="space-y-5">
-              <div class="space-y-2">
-                  <label for="npa" class="text-sm font-medium text-gray-700 tracking-wide">NPA</label>
-                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="npa" id="napa" type="text" placeholder="NPA" require>
-                  @error('npa')<div class="invalid-feedback">{{$message}}</div>@enderror
-              </div>
-            </div>
+            
             <div class="space-y-5">
               <div class="space-y-2">
                   <label for="alamat" class="text-sm font-medium text-gray-700 tracking-wide">Address</label>
-                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="alamat" id="alamat" type="text" placeholder="Alamat" require>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="alamat" id="alamat" type="text" placeholder="Alamat" required>
               </div>
             </div>
             <div class="space-y-5">
               <div class="space-y-2">
                   <label for="no_hp" class="text-sm font-medium text-gray-700 tracking-wide">Phone Number</label>
-                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="no_hp" id="no_hp" type="text" placeholder="No Hp" require>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="no_hp" id="no_hp" type="text" placeholder="No Hp" required>
               </div>
             </div>
 
             <div class="space-y-5">
               <div class="space-y-2">
                   <label for="email" class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
-                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="email" id="email" type="email" placeholder="mail@gmail.com" require>
+                  <input class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" name="email" id="email" type="email" placeholder="mail@gmail.com" required>
                   @error('email')<div class="invalid-feedback">{{$message}}</div>@enderror
               </div>
             </div>
@@ -63,7 +57,7 @@
                 <label for="password" class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
                 Password
                 </label>
-                <input class="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" id="password" placeholder="Enter your password" require>
+                <input class="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="password" name="password" id="password" placeholder="Enter your password" required>
              </div>
             
               <div>

@@ -24,7 +24,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'profil_image',
-        'npa',
         'alamat',
         'desa',
         'kecamatan',
@@ -95,5 +94,9 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    
+      # relasi ke model Anggota
+    public function anggota()
+    {
+        return $this->hasOne(Anggota::class);
+    }
 }

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('profil_image')->nullable();
-            $table->string('npa')->unique();
+            $table->string('npa')->nullable()->unique();
+            $table->string('npa_pending')->nullable();
+            $table->boolean('npa_approved')->default(false);
             $table->string('alamat');
             $table->string('desa')->nullable();
             $table->string('kecamatan')->nullable();
@@ -63,6 +65,7 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+       
     }
 
  

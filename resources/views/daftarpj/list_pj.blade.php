@@ -6,7 +6,7 @@
                       <div class="flex flex-wrap gap-4 m-4 bg-gray-100"> 
                           @foreach($pjs as $pj)
                           
-                        <div class="flex font-sans bg-green-500 rounded-xl shadow-lg hover:scale-[1.02] hover:shadow-xl transition-transform duration-300 ">
+                        <div class="flex font-sans bg-green-500 rounded-xl shadow-lg hover:scale-[1.01] hover:shadow-xl transition-transform duration-300 ">
                           <form class="flex-auto p-6">
                             <div class="flex flex-wrap">
                               <h1 class="flex-auto text-2xl font-bold text-gray-900">

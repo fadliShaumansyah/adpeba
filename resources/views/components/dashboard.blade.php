@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
 	<!-- Component Start -->
             <div class="flex flex-col items-center w-16 pb-4 border-r border-gray-300">
               <!--home/dashboard-->
-                <a class="flex items-center justify-center flex-shrink-0 w-full h-16 bg-gray-300" href="/dashboard">
+                <a class="flex items-center justify-center flex-shrink-0 w-full h-16 bg-gray-300" href="{{route('dashboard')}}">
                     <svg class="w-8 h-8"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                     </svg>
@@ -125,6 +124,8 @@
                                     @if(Auth::user()->role === 'super_admin')
                                         <a href="/admin/permissions" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">Admin Panel</span>
                                         </a>
+                                        <a href="{{route ('admin.npa.approval') }}" class="flex items-center flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300"> <span class="leading-none">pengajuan npa</span>
+                                        </a>
                                     @endif
                                 @endauth
                     
@@ -144,7 +145,8 @@
                         </button>
 
                         <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded hidden z-50">
-                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="#">Menu Item 1</a>
+                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="{{route('profile.edit')}}">
+                            Edit Profil</a>
                             <a class="block px-4 py-2 text-left hover:bg-gray-100" href="#">Menu Item 2</a>
                             <a class="block px-4 py-2 text-left hover:bg-gray-100" href="/logout">Logout</a>
                         </div>

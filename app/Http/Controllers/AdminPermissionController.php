@@ -73,4 +73,6 @@ class AdminPermissionController extends Controller
         ->with('success', 'Admin berhasil dihapus');
 }
 
+
+
 }

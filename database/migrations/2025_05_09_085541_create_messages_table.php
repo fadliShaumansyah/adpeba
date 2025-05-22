@@ -16,7 +16,8 @@ return new class extends Migration
         $table->uuid('sender_id');
         $table->uuid('receiver_id');
         $table->text('content');
-        $table->text('parent_id')->nullable();
+        $table->unsignedBigInteger('parent_id')->nullable();
+        $table->foreign('parent_id')->references('id')->on('messages')->onDelete('cascade');
         $table->timestamps();
     });
     }

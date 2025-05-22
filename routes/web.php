@@ -15,6 +15,7 @@ use App\Models\Post;
 use App\Http\Controllers\MessageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AnggotaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,9 +67,11 @@ Route::get('/contact', function () {
 Route::get('/portofolio', function () {
     return view('blog');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard')->middleware('auth');
+
+Route::get('/dashboard', [AnggotaController::class, 'jumlahAnggota'])
+    ->name('dashboard')
+    ->middleware('auth');
+
 
 Route::middleware(['auth', RoleMiddleware::class . ':super_admin'])->group(function () {
     Route::get('/admin/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index');
@@ -92,14 +95,14 @@ Route::middleware(['auth', AdminMiddleware::class . ':admin'])->group(function (
         return view('dakwah.index');})->name('dakwah');
 });
 // Rute untuk menampilkan halaman profil
-Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth');
-Route::get('/profile/{id}', [UserController::class, 'showProfileuser'])->name('show.profil')->middleware('auth');
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
 
 // Rute untuk menampilkan halaman edit profil
-Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('editprofil')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit')->middleware('auth');
 
 // Rute untuk mengupdate data profil setelah disubmit
-Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
+Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
+Route::get('/profile/{id}', [UserController::class, 'showProfileuser'])->name('show.profil')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -136,3 +139,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/dashboard'); // arahkan kembali ke akun
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/npa-approval', [AnggotaController::class, 'showNpaApproval'])->name('admin.npa.approval');
+    Route::post('/admin/npa-approve/{user}', [AnggotaController::class, 'approveNpa'])->name('admin.npa.approve');
+});

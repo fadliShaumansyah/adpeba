@@ -1,6 +1,6 @@
 <x-dashboard>
     <!-- Parent element HARUS punya x-data -->
-    <div class="max-w-3xl mx-auto p-6 bg-white rounded shadow" x-data="{ activeTab: 'inbox' }">
+    <div class="max-w-3xl mx-auto p-6 bg-white rounded shadow" x-data="{ activeTab: 'conversations' }">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">📨 Manajemen Pesan</h2>
         
        
@@ -8,52 +8,55 @@
         <!-- Tab Navigation -->
         <div class="flex border-b mb-6">
             <button 
-                @click.prevent="activeTab = 'inbox'"
-                :class="{ 'border-b-2 border-blue-500 text-blue-600': activeTab === 'inbox' }" 
+                @click.prevent="activeTab = 'conversations'"
+                :class="{ 'border-b-2 border-blue-500 text-blue-600': activeTab === 'conversations' }" 
                 class="px-4 py-2 font-medium"
             >
-                Kotak Masuk
-            </button>
-            <button 
-                @click.prevent="activeTab = 'outbox'"
-                :class="{ 'border-b-2 border-blue-500 text-blue-600': activeTab === 'outbox' }" 
-                class="px-4 py-2 font-medium"
-            >
-                Kotak Keluar
+                Percakapan
             </button>
             <button 
                 @click.prevent="activeTab = 'compose'"
                 :class="{ 'border-b-2 border-blue-500 text-blue-600': activeTab === 'compose' }" 
                 class="px-4 py-2 font-medium"
             >
-                Tulis Pesan
+                Tulis Pesan Baru
             </button>
         </div>
 
         <!-- Tab Content -->
         <div>
-            <!-- Inbox -->
-            <div x-show="activeTab === 'inbox'" x-transition>
-                @forelse($inboxMessages as $message)
-                   <a href="{{ route ('messages.show', ['message' => $message->id]) }}" class="block mb-1 bg-gray-50 rounded-lg hover:bg-gray-100">
-                    <div class="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg">
-                     <strong>  {{ $message->sender->name }} </strong><br>
-                       {{ $message->content }}
-                    </div>
+            <!-- Conversations -->
+            <div x-show="activeTab === 'conversations'" x-transition>
+                @forelse($messages as $message)
+                    <a href="{{ route('messages.show', $message) }}" class="block mb-4 hover:bg-gray-50 rounded-lg transition">
+                        <div class="p-4 border border-gray-200 rounded-lg">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="font-semibold">
+                                        {{ $message->sender_id === auth()->id() ? $message->receiver->name : $message->sender->name }}
+                                    </span>
+                                    <span class="text-sm text-gray-500 ml-2">
+                                        {{ $message->created_at->format('d M Y H:i') }}
+                                    </span>
+                                </div>
+                                @if($message->replies->count() > 0)
+                                    <span class="text-sm text-blue-600">
+                                        {{ $message->replies->count() }} balasan
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="text-gray-700">
+                                {{ Str::limit($message->content, 100) }}
+                            </div>
+                            @if($message->replies->count() > 0)
+                                <div class="mt-2 text-sm text-gray-500">
+                                    Balasan terakhir: {{ $message->replies->last()->created_at->format('d M Y H:i') }}
+                                </div>
+                            @endif
+                        </div>
                     </a>
                 @empty
-                    <p>Tidak ada pesan</p>
-                @endforelse
-            </div>
-            
-            <!-- Outbox -->
-            <div x-show="activeTab === 'outbox'" x-transition>
-                @forelse($outboxMessages as $message)
-                    <div class="mb-4 bg-green-50 rounded-lg">
-                        {{ $message->content }}
-                    </div>
-                @empty
-                    <p>Tidak ada pesan</p>
+                    <p class="text-gray-500 text-center py-4">Tidak ada percakapan</p>
                 @endforelse
             </div>
             
@@ -139,7 +142,7 @@
                     <div class="flex justify-end space-x-3 pt-2">
                         <button 
                             type="button" 
-                            @click="activeTab = 'inbox'"
+                            @click="activeTab = 'conversations'"
                             class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
                         >
                             Batal

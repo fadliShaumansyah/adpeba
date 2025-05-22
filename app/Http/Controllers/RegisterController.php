@@ -18,9 +18,9 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+ 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'npa' => 'required|string',
             'alamat' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
             'email' => 'required|email:rfc|unique:users,email',
@@ -33,10 +33,8 @@ class RegisterController extends Controller
         $validatedData['id'] = (string) Str::uuid();
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        // Buat user
         $user = User::create($validatedData);
         
-
 
         return redirect('/login')->with('success', 'Registrasi sukses! Silakan login. Email verifikasi sudah dikirim.');
     }

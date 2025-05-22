@@ -13,38 +13,39 @@ class MessageController extends Controller
     {
         $user = auth()->user();
         
-        // Inbox: Messages received by current user
-        $inboxMessages = Message::with('sender')
-            ->where('receiver_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        
-        // Outbox: Messages sent by current user
-        $outboxMessages = Message::with('receiver')
-            ->where('sender_id', $user->id)
+        // Get all messages where user is either sender or receiver
+        $messages = Message::with(['sender', 'receiver', 'replies.sender'])
+            ->where(function($query) use ($user) {
+                $query->where('sender_id', $user->id)
+                      ->orWhere('receiver_id', $user->id);
+            })
+            ->whereNull('parent_id') // Only get parent messages
             ->orderBy('created_at', 'desc')
             ->get();
             
         $users = User::where('id', '!=', $user->id)->get();
 
-        return view('message.index', compact('inboxMessages', 'outboxMessages', 'users'));
+        return view('message.index', compact('messages', 'users'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-        'receiver_id' => 'required|exists:users,id',
-        'content' => 'required|string|max:500'
-    ]);
+            'receiver_id' => 'required|exists:users,id',
+            'content' => 'required|string|max:500'
+        ]);
 
-    $message = Message::create($request->only('receiver_id', 'content') + [
-        'sender_id' => auth()->id()
-    ]);
+        $message = Message::create([
+            'sender_id' => auth()->id(),
+            'receiver_id' => $request->receiver_id,
+            'content' => $request->content,
+            'parent_id' => null // Explicitly set parent_id as null for new messages
+        ]);
 
-    return response()->json([
-        'status' => 'success',
-        'message' => $message
-    ]);
+        return response()->json([
+            'status' => 'success',
+            'message' => $message
+        ]);
     }
 
     public function show(Message $message)
@@ -68,24 +69,24 @@ class MessageController extends Controller
     ]);
     }
 
-    public function reply(Request $request, Message $originalMessage)
-{
-    $request->validate([
-        'content' => 'required|string|max:500',
-        'receiver_id' => 'required|exists:users,id',
-    ]);
-   
+    public function reply(Request $request, Message $message)
+    {
+        $request->validate([
+            'content' => 'required|string|max:500',
+            'receiver_id' => 'required|exists:users,id',
+        ]);
 
-    $reply = Message::create([
-        'sender_id' => auth()->id(),
-        'receiver_id' => $request->receiver_id,
-        'content' => $request->content,
-        'parent_id' => $originalMessage->id,
-    ]);
+        // Jika ini adalah balasan untuk pesan yang sudah memiliki parent
+        $rootMessage = $message->parent_id ? $message->originalMessage : $message;
 
-   return redirect()->route('messages.show', $originalMessage);
+        $reply = Message::create([
+            'sender_id' => auth()->id(),
+            'receiver_id' => $request->receiver_id,
+            'content' => $request->content,
+            'parent_id' => $rootMessage->id
+        ]);
 
-}
-
+        return redirect()->route('messages.show', $rootMessage);
+    }
 
 }

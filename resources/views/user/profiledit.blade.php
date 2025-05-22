@@ -31,8 +31,9 @@
 
                 <h2 class="text-2xl font-bold mb-4">Edit Profile</h2>
 
-                <form action="/profile/update" method="POST" class="space-y-4" enctype="multipart/form-data">
+                <form action="{{ route('profile.update') }}" method="POST" class="space-y-4 display:none;" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div>
                         <label for="profil_image" class="block text-sm font-medium text-gray-700 mb-1">Gambar (opsional)</label>
                         <input type="file" value="{{$user->profil_image}}" name="profil_image" id="profil_image"
@@ -43,11 +44,29 @@
                         <input type="text" name="name" value="{{$user->name}}"
                             class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
                     </div>
+<div>
+    
+    
 
-                    <div> 
-                        <label class="block text-sm font-bold text-gray-700">NPA</label>
+    @if ($user->npa !== null)
+        <label class="block text-sm font-bold text-gray-700">NPA</label>
                         <input type="text" name="npa" value="{{$user->npa}} "readonly
                             class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+    @else
+        <a href="#" id="showInputLink" class="text-blue-600 underline-none cursor-pointer">Punya Nomor Registrasi ?</a>
+
+        <!-- Form input NPA yang awalnya disembunyikan -->
+        
+            <input type="text" name="npa" id="npaInput" class="border rounded px-2 py-1 mt-2 hidden" placeholder="Masukkan NoReg">
+
+           
+    @endif
+</div>
+
+
+
+                    <div> 
+                       
                     </div>
 
                     <div>
@@ -139,12 +158,21 @@
                             class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
                             Save Changes
                         </button>
-                        <a href="/profile" class="ml-4 text-gray-600 hover:text-green-700 font-semibold">Cancel</a>
+                        <a href="{{ route('profile') }}" class="ml-4 text-gray-600 hover:text-green-700 font-semibold">Cancel</a>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <script>
+  document.getElementById('showInputLink').addEventListener('click', function(e) {
+    e.preventDefault(); // supaya link tidak reload page
+    this.style.display = 'none'; // sembunyikan link
+    document.getElementById('npaInput').classList.remove('hidden'); // tampilkan input
+    document.getElementById('npaInput').focus(); // fokus ke input supaya user langsung bisa ketik
+  });
+</script>
 </body>
 </html>
