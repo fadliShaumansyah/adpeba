@@ -19,8 +19,14 @@
         <input type="text" name="alamat_pj" id="alamat_pj" required><br>
 
         <label for="ketua_pj">Ketua Pj:</label>
-        <input type="text" name="ketua_pj" id="ketua_pj" required><br>
-
+        <select name="ketua_pj" class="form-select">
+        <option value="" class="">Pilih Anggota</option>
+        @foreach($anggota as $item)
+            <option value="{{ $item->id }}">
+                {{ $item->user->name }} - {{ $item->npa }}
+            </option>
+        @endforeach
+    </select>
         <label for="sk_ketua_pj">S.K ketua Pj:</label>
         <input type="text" name="sk_ketua_pj" id="sk_ketua_pj" required><br>
 

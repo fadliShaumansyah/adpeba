@@ -6,6 +6,7 @@ use App\Models\DaftarPj;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Event;
+use App\Models\Anggota;
 
 class DaftarPjController extends Controller
 {
@@ -25,8 +26,31 @@ class DaftarPjController extends Controller
      */
     public function create()
     {
-        return view('dashboard.inputpj');
+        // Ambil semua anggota beserta user-nya (relasi)
+    $anggota = Anggota::with('user')->get();
+
+    return view('dashboard.inputpj', compact('anggota'));
     }
+
+ public function getKontakUser($id)
+{
+    $anggota = Anggota::with('user')->find($id);
+
+    if (!$anggota || !$anggota->user) {
+        return response()->json([
+            'success' => false,
+            'error' => 'Data tidak ditemukan',
+            'no_hp' => null
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'no_hp' => $anggota->user->no_hp
+    ]);
+}
+
+
 
     /**
      * Store a newly created resource in storage.

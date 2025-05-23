@@ -112,10 +112,10 @@ public function updateProfile(Request $request)
         'profil_image' => 'nullable|image|max:2048',
         'alamat' => 'required|string|max:255',
         'npa' => 'nullable|string|max:255',
-        'desa' => 'string|max:255',
-        'kecamatan' => 'string|max:255',
-        'kota' => 'string|max:255',
-        'provinsi' => 'string|max:255',
+        'desa' => 'nullable|string|max:255',
+        'kecamatan' => 'nullable|string|max:255',
+        'kota' => 'nullable|string|max:255',
+        'provinsi' => 'nullable|string|max:255',
         'tanggal_lahir' => 'date|max:255',
         'sd' => 'nullable|string|max:255',
         'smp' => 'nullable|string|max:255',
@@ -135,19 +135,12 @@ public function updateProfile(Request $request)
     // Update data pengguna
     $user->name = $validatedData['name'];
     $user->alamat = $validatedData['alamat'];
-    $user->npa = $validatedData['npa'];
     $user->no_hp = $validatedData['no_hp'];
     $user->email = $validatedData['email'];
-    $user->desa = $validatedData['desa'];
-    $user->kecamatan = $validatedData['kecamatan'];
-    $user->kota = $validatedData['kota'];
-    $user->provinsi = $validatedData['provinsi'];
-    $user->sd = $validatedData['sd'];
-    $user->smp = $validatedData['smp'];
+   
+    
     $user->sma = $validatedData['sma'];
-    $user->s1 = $validatedData['s1'];
-    $user->s2 = $validatedData['s2'];
-    $user->s3 = $validatedData['s3'];
+    
     $user->bio = $validatedData['bio'];
 
     // Jika ada password yang diubah, enkripsi password dan simpan

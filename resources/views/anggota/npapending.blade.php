@@ -27,13 +27,24 @@
                         <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
                         <td class="border border-gray-300 px-4 py-2">{{ $user->npa_pending }}</td>
                         <td class="border border-gray-300 px-4 py-2 text-center">
-                            <form action="{{ route('admin.npa.approve', $user->id) }}" method="POST" onsubmit="return confirm('Setujui NPA untuk {{ $user->name }}?')">
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
-                                    Setujui
-                                </button>
-                            </form>
+                           <div class="flex space-x-2">
+    <form action="{{ route('admin.npa.approve', $user->id) }}" method="POST" onsubmit="return confirm('Setujui NPA untuk {{ $user->name }}?')">
+        @csrf
+        @method('POST')
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+            Setujui
+        </button>
+    </form>
+
+    <form action="{{ route('admin.npa.reject', $user->id) }}" method="POST" onsubmit="return confirm('Tolak NPA untuk {{ $user->name }}?')">
+        @csrf
+        @method('POST')
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+            Tolak
+        </button>
+    </form>
+</div>
+
                         </td>
                     </tr>
                     @endforeach

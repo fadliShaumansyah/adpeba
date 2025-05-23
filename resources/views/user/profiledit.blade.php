@@ -71,8 +71,8 @@
 
                     <div>
                         <label class="block text-sm font-bold text-gray-700">Tanggal Lahir</label>
-                        <input type="text" name="tanggal_lahir" value="{{$user->tanggal_lahir}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+                             
+        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" value="{{$user->tanggal_lahir}}" required>
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-gray-700">Phone Number</label>
@@ -111,41 +111,14 @@
                         <input type="text" name="kota" value="{{$user->kota}}"
                             class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
                     </div>
+                   
                     <div>
-                        <label class="block text-sm font-bold text-gray-700">Provinsi</label>
-                        <input type="text" name="provinsi" value="{{$user->provinsi}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Sekolah Dasar</label>
-                        <input type="text" name="sd" value="{{$user->sd}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Sekolah Menengah Pertama</label>
-                        <input type="text" name="smp" value="{{$user->smp}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Sekolah Menengan Atas</label>
+                        <label class="block text-sm font-bold text-gray-700">Pendidikan Terakhir</label>
                         <input type="text" name="sma" value="{{$user->sma}}"
                             class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Strata Satu</label>
-                        <input type="text" name="s1" value="{{$user->s1}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Strata Dua</label>
-                        <input type="text" name="s2" value="{{$user->s2}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700">Strata Tiga</label>
-                        <input type="text" name="s3" value="{{$user->s3}}"
-                            class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
-                    </div>
+                  
+                    
 
                     <div>
                         <label class="block text-sm font-bold text-gray-700">About You</label>

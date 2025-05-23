@@ -46,6 +46,7 @@ Route::get('/user/{name?}', [UserController::class, 'optionalShow'])->middleware
 Route::get('/inputpj', [DaftarPjController::class, 'create'])->name('inputpj');
 Route::get('/list_pj', [DaftarPjController::class, 'index'])->name('list_pj');
 Route::post('/daftarpj/post', [DaftarPjController::class, 'store']);
+Route::get('/get-user-kontak/{id}', [DaftarPjController::class, 'getKontakUser']);
 
 Route::get('/Registrasi',[RegisterController::class, 'index'])->name('Registrasi')->middleware('guest');
 Route::post('/Registrasi',[RegisterController::class, 'store']);
@@ -142,4 +143,5 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/npa-approval', [AnggotaController::class, 'showNpaApproval'])->name('admin.npa.approval');
     Route::post('/admin/npa-approve/{user}', [AnggotaController::class, 'approveNpa'])->name('admin.npa.approve');
+    Route::post('/admin/npa-reject/{user}', [AnggotaController::class, 'rejectNpa'])->name('admin.npa.reject');
 });

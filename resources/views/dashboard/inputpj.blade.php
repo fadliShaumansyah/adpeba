@@ -30,7 +30,14 @@
         <input type="text" name="alamat_pj" id="alamat_pj" class=" text-black placeholder-gray-600 w-1/2 px-4 py-2.5 mt-1 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-400  focus:bg-white  focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-blue-400" required>
 
         <label for="ketua_pj">Ketua Pj:</label>
-        <input type="text" name="ketua_pj" id="ketua_pj" class=" text-black placeholder-gray-600 w-1/2 px-4 py-2.5 mt-1 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-400  focus:bg-white  focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-blue-400" required>
+        <select id="ketua_pj" name="ketua_pj" class="form-select  text-black placeholder-gray-600 w-1/2 px-4 py-2.5 mt-1 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-400  focus:bg-white  focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-blue-400" required> 
+        <option value=""  class="">Pilih Anggota</option>
+        @foreach($anggota as $item)
+            <option value="{{ $item->id }}" >
+                {{ $item->user->name }} - {{ $item->npa }}
+            </option>
+        @endforeach
+        </select>
 
         <label for="sk_ketua_pj">S.K ketua Pj:</label>
         <input type="text" name="sk_ketua_pj" id="sk_ketua_pj" class=" text-black placeholder-gray-600 w-1/2 px-4 py-2.5 mt-1 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-400  focus:bg-white  focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-blue-400" required>
@@ -43,6 +50,7 @@
 
         <label for="kontak_ketua_pj">Kontak:</label>
         <input type="text" name="kontak_ketua_pj" id="kontak_ketua_pj" class=" text-black placeholder-gray-600 w-1/2 px-4 py-2.5 mt-1 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-400  focus:bg-white  focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-blue-400" required>
+
 
         <!--button--> 
         <div class="flex flex-row p-3">
@@ -63,5 +71,55 @@
 
 </div>   
 
+    <script>
+        //start-mengisi kontak di input pj otomatis,
+ document.getElementById('ketua_pj').addEventListener('change', async function() {
+    const kontakInput = document.getElementById('kontak_ketua_pj');
     
+    try {
+        // 1. Reset state
+        kontakInput.value = 'Memuat...';
+        kontakInput.classList.add('loading');
+
+        // 2. Validasi pilihan
+        if (!this.value) {
+            kontakInput.value = '';
+            return;
+        }
+
+        // 3. Fetch data
+        const response = await fetch(`/get-user-kontak/${this.value}`);
+        
+        // 4. Handle HTTP error (404, 500, etc)
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Server error');
+        }
+
+        // 5. Proses response
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error || 'Invalid data');
+        }
+
+        kontakInput.value = data.no_hp;
+
+    } catch (error) {
+        // 6. Tampilkan error ke user
+        kontakInput.value = `Error: ${error.message}`;
+        console.error('Fetch error:', error);
+        
+        // 7. Optional: Notifikasi UI
+        alert(`Gagal memuat kontak: ${error.message}`);
+        
+    } finally {
+        // 8. Cleanup
+        kontakInput.classList.remove('loading');
+    }
+  
+
+});
+//end-mengisi kontak di input pj otomatis,
+</script>
 </x-dashboard>
