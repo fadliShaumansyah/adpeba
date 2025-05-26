@@ -154,7 +154,7 @@
                         <div id="dropdownMenu" class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded hidden z-50">
                             <a class="block px-4 py-2 text-left hover:bg-gray-100" href="{{route('profile.edit')}}">
                             Edit Profil</a>
-                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="#">Menu Item 2</a>
+                            <a class="block px-4 py-2 text-left hover:bg-gray-100" href="{{ route ('admin.indexpanel.base') }}">admin panel</a>
                             <a class="block px-4 py-2 text-left hover:bg-gray-100" href="/logout">Logout</a>
                         </div>
                     </div>

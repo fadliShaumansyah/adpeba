@@ -145,3 +145,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/npa-approve/{user}', [AnggotaController::class, 'approveNpa'])->name('admin.npa.approve');
     Route::post('/admin/npa-reject/{user}', [AnggotaController::class, 'rejectNpa'])->name('admin.npa.reject');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//dashboar admin terpisah
+Route::view('/admin-panel', 'admin.indexpanel')->name('admin.indexpanel.base');
+Route::any('/admin-panel/{any}', fn () => view('admin.indexpanel'))->where('any', '.*')->name('admin.indexpanel');
